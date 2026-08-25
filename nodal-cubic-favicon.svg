@@ -6,7 +6,7 @@
       (x,y) = (t^2 - 1, t(t^2 - 1)),  -sqrt(7)/2 <= t <= sqrt(7)/2,
     followed by an affine change of plotting coordinates.
   -->
-  <g transform="translate(42 42) scale(0.8359375)" shape-rendering="geometricPrecision">
+  <g transform="translate(26 26) scale(0.8984375)" shape-rendering="geometricPrecision">
     <rect width="512" height="512" rx="96" ry="96" fill="#0B1F33"/>
     <path
       d="M 435.2000 459.1937
