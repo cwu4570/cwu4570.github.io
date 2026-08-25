@@ -1,22 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
   <title id="title">Real nodal cubic</title>
-  <desc id="desc">The real locus of y squared equals x cubed plus x squared, drawn in white on a crisp rounded navy-blue tile with a transparent margin.</desc>
+  <desc id="desc">The real locus of y squared equals x cubed plus x squared, drawn in white on a full-size rounded navy-blue background.</desc>
   <!--
     Exact cubic Bezier representation of
       (x,y) = (t^2 - 1, t(t^2 - 1)),  -sqrt(7)/2 <= t <= sqrt(7)/2,
     followed by an affine change of plotting coordinates.
   -->
-  <g transform="translate(26 26) scale(0.8984375)" shape-rendering="geometricPrecision">
-    <rect width="512" height="512" rx="96" ry="96" fill="#0B1F33"/>
-    <path
-      d="M 435.2000 459.1937
-         C -42.6667 -308.4270,
-           -42.6667 820.4270,
-           435.2000 52.8063"
-      fill="none"
-      stroke="#FFFFFF"
-      stroke-width="34"
-      stroke-linecap="round"
-      stroke-linejoin="round"/>
-  </g>
+  <rect width="512" height="512" rx="96" ry="96" fill="#0B1F33"/>
+  <path
+    d="M 435.2000 459.1937
+       C -42.6667 -308.4270,
+         -42.6667 820.4270,
+         435.2000 52.8063"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="28"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    shape-rendering="geometricPrecision"/>
 </svg>
