@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
   <title id="title">Real nodal cubic</title>
-  <desc id="desc">The real locus of y squared equals x cubed plus x squared, drawn in white on navy blue.</desc>
-  <rect width="512" height="512" fill="#0B1F33"/>
+  <desc id="desc">The real locus of y squared equals x cubed plus x squared, drawn in white on a subtly rounded navy-blue background.</desc>
+  <rect width="512" height="512" rx="32" ry="32" fill="#0B1F33"/>
   <!--
     Exact cubic Bezier representation of
       (x,y) = (t^2 - 1, t(t^2 - 1)),  -sqrt(7)/2 <= t <= sqrt(7)/2,
