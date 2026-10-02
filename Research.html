@@ -1,36 +1,93 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en">
 
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']]
-    }
-  };
-</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js">
-</script>
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js">
+  </script>
+
   <meta name="keywords" content="">
   <meta name="description" content="">
   <title>Research &middot; Charlie Wu</title>
   <link rel="stylesheet" href="nicepage.css" media="screen">
   <link rel="stylesheet" href="Research.css" media="screen">
+  <style>
+    /* Abstracts expand independently using the browser's native disclosure control. */
+    #sec-d4af .research-abstract {
+      margin-top: 0.5rem;
+    }
+
+    #sec-d4af .research-abstract>summary {
+      display: block;
+      list-style: none;
+      width: fit-content;
+      max-width: 100%;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      font-size: 0.95em;
+    }
+
+    /* A custom marker keeps summaries out of the reversed publication numbering. */
+    #sec-d4af .research-abstract>summary::-webkit-details-marker {
+      display: none;
+    }
+
+    #sec-d4af .research-abstract>summary::before {
+      content: "";
+      display: inline-block;
+      margin-right: 0.5em;
+      border-top: 0.3em solid transparent;
+      border-bottom: 0.3em solid transparent;
+      border-left: 0.4em solid currentColor;
+    }
+
+    #sec-d4af .research-abstract[open]>summary::before {
+      transform: rotate(90deg);
+    }
+
+    #sec-d4af .research-abstract>summary:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    #sec-d4af .research-abstract>summary:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+    }
+
+    #sec-d4af .research-abstract-content {
+      margin-top: 0.5rem;
+      padding-left: 1rem;
+      border-left: 2px solid currentColor;
+      font-size: 0.95em;
+      line-height: 1.7;
+      overflow-wrap: break-word;
+    }
+
+    #sec-d4af .research-abstract-content>p {
+      margin: 0 0 0.75rem;
+    }
+
+    #sec-d4af .research-abstract-content>p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
   <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
   <meta name="generator" content="Nicepage 6.16.5, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Charlie Wu</title>
-    <link rel="icon" href="/nodal-cubic-favicon.svg" type="image/svg+xml">
-  </head>
+  <link rel="icon" href="/nodal-cubic-favicon.svg" type="image/svg+xml">
 
 
   <script type="application/ld+json">{
@@ -143,25 +200,92 @@
       <ol reversed class="u-text u-text-default u-text-2">
 
 
+        <!-- <li class="u-text u-text-2">Geometric Local Systems with Maximal Unipotent Monodromy at a Point
+          (joint with <a href="https://www.daniellitt.com/" class="u-text-palette-1-base u-btn-1">Daniel Litt</a> and <a
+            href="https://www.mathematics.utoronto.ca/people/directories/graduate-students/andy-ramirez-c%C3%B4t%C3%A9"
+            class="u-text-palette-1-base u-btn-1">Andy Ramirez-Cot&eacute;</a>, <a
+            href="https://arxiv.org/abs/2509.25629" class="u-text-palette-1-base u-btn-1">arXiv
+            version</a>, December? 2026?)
+          <details class="research-abstract">
+            <summary>Abstract</summary>
+            <div class="research-abstract-content">
+              <p>TBA</p>
+            </div>
+          </details>
+        </li> -->
+
+
         <!-- <li class="u-text u-text-2">Compact Components of Character Varieties
-          (<a href="placeholder" class="u-text-palette-1-base u-btn-1">arXiv
-            version</a>, 2025,
-          <br class="u-text u-text-2">joint with <a href="https://www.daniellitt.com/"
-            class="u-text-palette-1-base u-btn-1">Daniel Litt</a>) -->
+          (joint with <a href="https://www.daniellitt.com/" class="u-text-palette-1-base u-btn-1">Daniel Litt</a>, <a
+            href="https://arxiv.org/abs/2509.25629" class="u-text-palette-1-base u-btn-1">arXiv
+            version</a>, December? 2026?)
+          <details class="research-abstract">
+            <summary>Abstract</summary>
+            <div class="research-abstract-content">
+              <p>Let $G$ be a real reductive group and $\Sigma_{g,n}$ an orientable topological surface of genus $g$
+                with $n$ punctures. We classify compact components of (relative) character varieties of
+                $G$-representations of $\pi_1(\Sigma_{g,n})$ in terms of Hodge-theoretic data. In genus $g > 0$, we show
+                that compact components arise only when $G$ is compact. By contrast, in genus $0$, we find a huge
+                collection of compact components whose properties we study. We study a number of new phenomena around
+                mapping class group dynamics and the representation theory of surface groups.</p>
+            </div>
+          </details>
+        </li> -->
 
         <!-- <li class="u-text u-text-2">Privileged $SL_3$-Local Systems are Motivic
-          (<a href="placeholder_arXiv" class="u-text-palette-1-base u-btn-1">arXiv
-            version</a>, 2026,
-          <br class="u-text u-text-2">joint with <a href="placeholder_website"
-            class="u-text-palette-1-base u-btn-1">Julia Meng</a>) -->
+          (joint with <a href="https://math.mit.edu/directory/profile.html?pid=2677"
+            class="u-text-palette-1-base u-btn-1">Julia Meng</a>, <a href="https://arxiv.org/abs/2509.25629"
+            class="u-text-palette-1-base u-btn-1">arXiv
+            version</a>, October? 2026)
+          <details class="research-abstract">
+            <summary>Abstract</summary>
+            <div class="research-abstract-content">
+              <p>Let $X$ be a smooth projective variety over the complex numbers, and let $\mathbb{V}$ be an irreducible
+                privileged $\mathrm{SL}_3$-local system on $X$ in the sense of Esnault and Groechenig. We show that
+                $\mathbb{V}$ is of geometric origin. We also give an example of a privileged but non-rigid
+                $\mathrm{SL}_3$-local system.</p>
+            </div>
+          </details>
+        </li> -->
+
 
         <li class="u-text u-text-2">Hypergeometric Local Systems and Parabolic Bundles (<a
             href="https://arxiv.org/abs/2509.25629" class="u-text-palette-1-base u-btn-1">arXiv version</a>, 2025)
+          <details class="research-abstract">
+            <summary>Abstract</summary>
+            <div class="research-abstract-content">
+              <p>Beukers and Heckman gave necessary and sufficient conditions for a hypergeometric function $_n F_{n-1}$
+                to be algebraic. We give a new proof of this theorem by passing through the Mehta-Seshadri
+                correspondence. In particular, we explicitly write down the parabolic bundle corresponding to a unitary
+                hypergeometric local system.</p>
+            </div>
+          </details>
+        </li>
 
 
         <li class="u-text u-text-2">Minimal Energy Local Systems on Curves (accepted at <em lang="fr">&Eacute;pijournal
             de G&eacute;om&eacute;trie Alg&eacute;brique</em>, <a href="https://arxiv.org/abs/2503.19250"
             class="u-text-palette-1-base u-btn-1">arXiv version</a>, 2025)
+          <details class="research-abstract">
+            <summary>Abstract</summary>
+            <div class="research-abstract-content">
+              <p>Let $\Sigma_{g,n}$ be an orientable topological surface of genus $g$ with $n$ punctures. When $g = 0$,
+                Deroin and Tholozan studied the class of supra-maximal representations $\pi_1(\Sigma_{0,n})\to
+                \mathrm{PSL}_2(\mathbb{R})$, and they showed that the supra-maximal representations form a compact
+                component of a real relative character variety. We study a collection of rank $r$ local systems on
+                $\Sigma_{g,n}$ which we call of minimal energy. These are generalizations of supra-maximal
+                representations, and underlie polarizable complex variations of Hodge structure for any choice of
+                complex structure on $\Sigma_{g,n}$. Like the supra-maximal representations, the minimal energy local
+                systems form compact components of relative character varieties of real forms of
+                $\mathrm{GL}_r(\mathbb{C})$.</p>
+              <p>We show that when the local monodromy data around the punctures is chosen to be unitary and generic,
+                and the relative character variety is nonempty, these minimal energy local systems always exist. When $g
+                &gt; 0$, we show that the minimal energy local systems come from unitary representations of
+                $\pi_1(\Sigma_{g,n})$. If $g = 0$ we show that they do not always come from unitary representations, and
+                we study their structure in general.</p>
+            </div>
+          </details>
+        </li>
       </ol>
     </div>
   </section>
