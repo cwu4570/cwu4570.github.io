@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -56,4 +56,208 @@
     </ol>
   </main>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coding Projects · Charlie Wu</title>
+  <meta name="description" content="Research-related coding projects by Charlie Wu.">
+  <meta name="theme-color" content="#faf9f6">
+  <link rel="canonical" href="https://cwu4570.github.io/Coding-Projects.html">
+  <link rel="icon" href="nodal-cubic-favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+
+  <style>
+    /* Hidden on desktop and when JavaScript is unavailable. */
+    .site-header .nav-toggle {
+      display: none;
+    }
+
+    /* These layout changes apply only on smaller screens. */
+    @media (max-width: 700px) {
+      .site-header.nav-ready .header-inner {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: .65rem 1rem;
+        padding-block: .7rem;
+      }
+
+      .site-header.nav-ready .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        min-width: 72px;
+        min-height: 44px;
+        padding: .45rem .8rem;
+        font: 600 .875rem/1 var(--sans);
+        color: var(--heading);
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .site-header .nav-toggle:focus-visible {
+        outline: 2px solid var(--link);
+        outline-offset: 4px;
+      }
+
+      /* When opened, the navigation sits below the name and button. */
+      .site-header.nav-ready .site-nav {
+        flex: 0 0 100%;
+        padding-top: .5rem;
+        border-top: 1px solid var(--line);
+      }
+
+      /* Collapse navigation only after JavaScript has initialized. */
+      .site-header.nav-ready .nav-toggle[aria-expanded="false"]+.site-nav {
+        display: none;
+      }
+
+      .site-header.nav-ready .site-nav ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .25rem 1rem;
+      }
+
+      .site-header.nav-ready .site-nav a {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 44px;
+        padding-block: .4rem;
+      }
+    }
+  </style>
+
+  <meta property="og:title" content="Coding Projects · Charlie Wu">
+  <meta property="og:description" content="Research-related coding projects by Charlie Wu.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cwu4570.github.io/Coding-Projects.html">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="site-name" href="index.html">Charlie Wu</a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">
+        Menu
+      </button>
+
+      <nav id="main-navigation" class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Research.html">Research</a></li>
+          <li><a href="Talk-Notes.html">Talk Notes</a></li>
+          <li><a href="Coding-Projects.html" aria-current="page">Code</a></li>
+          <li><a href="Teaching.html">Teaching</a></li>
+          <li><a href="Gallery.html">Gallery</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container" tabindex="-1">
+    <h1>Coding Projects</h1>
+    <div class="prose page-intro">
+      <p>You can find various coding projects here. The vast majority will be
+        either directly related to, or ultimately for the purpose of, my research interests.</p>
+    </div>
+    <ol class="resource-list" role="list">
+      <li>
+        <h2><a href="https://github.com/cwu4570/ClassifyingRationals/tree/main" target="_blank" rel="noopener">Vanishing
+            sums of roots of unity</a></h2>
+        <p>This algorithm takes a natural number n and
+          produces all irreducible k-tuples of roots of unity which sum to zero up to k = n. This&nbsp;algorithm is
+          from Lemma 19 of <a href="https://arxiv.org/abs/0809.4873" target="_blank" rel="noopener">this</a>&nbsp;paper
+          by Lisovyy and Tykhyy on the algebraic solutions to the Painlevé IV
+          equation. Special thanks to <a href="https://sachagoldman.com/" target="_blank" rel="noopener">Sacha
+            Goldman</a> who did much of the heavy lifting.</p>
+      </li>
+    </ol>
+  </main>
+
+  <script>
+    (() => {
+      const header = document.querySelector(".site-header");
+      if (!header) return;
+
+      const button = header.querySelector(".nav-toggle");
+      const navigation = header.querySelector("#main-navigation");
+      if (!button || !navigation) return;
+
+      const mobile = window.matchMedia("(max-width: 700px)");
+
+      function setOpen(open) {
+        button.setAttribute("aria-expanded", String(open));
+        button.textContent = open ? "Close" : "Menu";
+      }
+
+      button.addEventListener("click", () => {
+        setOpen(button.getAttribute("aria-expanded") !== "true");
+      });
+
+      header.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          mobile.matches &&
+          button.getAttribute("aria-expanded") === "true"
+        ) {
+          event.preventDefault();
+          setOpen(false);
+          button.focus();
+        }
+      });
+
+      function syncWithScreenSize() {
+        const focusedElement = document.activeElement;
+        setOpen(!mobile.matches);
+
+        // Keep keyboard focus out of controls hidden by resizing.
+        if (mobile.matches && navigation.contains(focusedElement)) {
+          button.focus();
+        } else if (!mobile.matches && focusedElement === button) {
+          const link =
+            navigation.querySelector('[aria-current="page"]') ||
+            navigation.querySelector("a");
+          if (link) link.focus();
+        }
+      }
+
+      if (typeof mobile.addEventListener === "function") {
+        mobile.addEventListener("change", syncWithScreenSize);
+      } else {
+        mobile.addListener(syncWithScreenSize);
+      }
+
+      header.classList.add("nav-ready");
+      syncWithScreenSize();
+    })();
+  </script>
+</body>
+
 </html>
