@@ -16,13 +16,42 @@
   <link rel="stylesheet" href="site.css">
 
   <style>
-    /* Hide the new button on desktop and when JavaScript is unavailable. */
+    /* Keep the mobile Menu button out of the desktop layout. */
     .site-header .nav-toggle {
       display: none;
     }
 
-    /* All layout changes are limited to mobile screens. */
+    @media screen {
+
+      /* Bring the homepage content a little closer to the header. */
+      .home-main {
+        padding-top: 2.5rem;
+      }
+
+      /*
+        Remove the repeated name visually, without removing the page's
+        main heading for screen readers. It remains visible in print.
+      */
+      .home-main .home-heading {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+      }
+    }
+
     @media screen and (max-width: 700px) {
+      .home-main {
+        padding-top: 1.75rem;
+      }
+
+      /* The same compact mobile menu used on your other pages. */
       .site-header.nav-ready .header-inner {
         flex-direction: row;
         flex-wrap: wrap;
@@ -54,7 +83,6 @@
         outline-offset: 4px;
       }
 
-      /* The expanded menu appears below the name and button. */
       .site-header.nav-ready .site-nav {
         flex: 0 0 100%;
         min-width: 0;
@@ -62,7 +90,7 @@
         border-top: 1px solid var(--line);
       }
 
-      /* Without JavaScript, the original navigation remains visible. */
+      /* If JavaScript is unavailable, the original navigation stays visible. */
       .site-header.nav-ready .nav-toggle[aria-expanded="false"]+.site-nav {
         display: none;
       }
@@ -115,33 +143,34 @@
     </div>
   </header>
 
-  <main id="main" class="container" tabindex="-1">
+  <main id="main" class="container home-main" tabindex="-1">
     <div class="home-layout">
       <div class="home-intro">
-        <h1>Charlie Wu</h1>
+        <h1 class="home-heading">Charlie Wu</h1>
         <p class="home-role">
-          <span>Postdoctoral Fellow</span>
+          <span>Postdoctoral fellow</span>
           <a href="https://www.mpim-bonn.mpg.de/" target="_blank" rel="noopener">Max Planck Institute for
             Mathematics</a><br>
           Bonn, Germany
         </p>
+
         <div class="prose">
-          <p>I am a postdoctoral fellow at the <a href="https://www.mpim-bonn.mpg.de/" target="_blank"
-              rel="noopener">Max Planck Institute for
-              Mathematics</a>. Previously, I was a PhD student in the
+          <p>I am interested in algebraic geometry and number theory.</p>
+          <p>Previously, I was a PhD student in the
             <a href="https://www.mathematics.utoronto.ca/" target="_blank" rel="noopener">mathematics department</a>
             at the <a href="https://www.utoronto.ca/" target="_blank" rel="noopener">University of Toronto</a>,
             where I was very fortunate to be a student of
             <a href="https://www.daniellitt.com/" target="_blank" rel="noopener">Daniel Litt</a>.
-          <p>I am interested in algebraic geometry and number theory.</p>
           </p>
         </div>
+
         <ul class="quick-links" aria-label="Quick links">
           <li><a href="files/CV.pdf" target="_blank" rel="noopener">CV</a></li>
           <li><a href="Research.html">Research</a></li>
           <li><a href="mailto:charliewu.math@gmail.com">Email</a></li>
         </ul>
       </div>
+
       <img class="portrait" src="images/Homepage_photo_2.jpeg" width="300" height="300" alt="Charlie Wu by the water"
         fetchpriority="high">
     </div>
@@ -197,7 +226,7 @@
         const focusedElement = document.activeElement;
         setOpen(!mobile.matches);
 
-        // Move keyboard focus if resizing hides the focused control.
+        // Keep keyboard focus out of controls hidden by resizing.
         if (mobile.matches && navigation.contains(focusedElement)) {
           button.focus();
         } else if (!mobile.matches && focusedElement === button) {
