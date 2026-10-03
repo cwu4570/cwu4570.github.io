@@ -13,10 +13,80 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
+
+  <style>
+    /* Hide the new button on desktop and when JavaScript is unavailable. */
+    .site-header .nav-toggle {
+      display: none;
+    }
+
+    /* All layout changes are limited to mobile screens. */
+    @media screen and (max-width: 700px) {
+      .site-header.nav-ready .header-inner {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: .65rem 1rem;
+        padding-block: .7rem;
+      }
+
+      .site-header.nav-ready .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        min-width: 72px;
+        min-height: 44px;
+        padding: .45rem .8rem;
+        font: 600 .875rem/1 var(--sans);
+        color: var(--heading);
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        cursor: pointer;
+        appearance: none;
+      }
+
+      .site-header .nav-toggle:focus-visible {
+        outline: 2px solid var(--link);
+        outline-offset: 4px;
+      }
+
+      /* The expanded menu appears below the name and button. */
+      .site-header.nav-ready .site-nav {
+        flex: 0 0 100%;
+        min-width: 0;
+        padding-top: .5rem;
+        border-top: 1px solid var(--line);
+      }
+
+      /* Without JavaScript, the original navigation remains visible. */
+      .site-header.nav-ready .nav-toggle[aria-expanded="false"]+.site-nav {
+        display: none;
+      }
+
+      .site-header.nav-ready .site-nav ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .25rem 1rem;
+      }
+
+      .site-header.nav-ready .site-nav a {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 44px;
+        padding-block: .4rem;
+      }
+    }
+  </style>
+
   <meta property="og:title" content="Research · Charlie Wu">
   <meta property="og:description" content="Publications and preprints by Charlie Wu, with abstracts and arXiv links.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cwu4570.github.io/Research.html">
+
   <script>
     window.MathJax = {
       tex: {
@@ -30,10 +100,16 @@
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="site-name" href="index.html">Charlie Wu</a>
-      <nav class="site-nav" aria-label="Main navigation">
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">
+        Menu
+      </button>
+
+      <nav id="main-navigation" class="site-nav" aria-label="Main navigation">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="Research.html" aria-current="page">Research</a></li>
@@ -46,6 +122,7 @@
       </nav>
     </div>
   </header>
+
   <main id="main" class="container" tabindex="-1">
     <h1>Publications and Preprints</h1>
     <ol class="publication-list" reversed start="2">
@@ -152,6 +229,75 @@
     </ol>
 
   </main>
+
+  <script>
+    (() => {
+      const header = document.querySelector(".site-header");
+      if (!header) return;
+
+      const button = header.querySelector(".nav-toggle");
+      const navigation = header.querySelector("#main-navigation");
+      if (!button || !navigation) return;
+
+      const mobile = window.matchMedia("screen and (max-width: 700px)");
+
+      function setOpen(open) {
+        button.setAttribute("aria-expanded", String(open));
+        button.textContent = open ? "Close" : "Menu";
+      }
+
+      button.addEventListener("click", () => {
+        setOpen(button.getAttribute("aria-expanded") !== "true");
+      });
+
+      header.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          mobile.matches &&
+          button.getAttribute("aria-expanded") === "true"
+        ) {
+          event.preventDefault();
+          setOpen(false);
+          button.focus();
+        }
+      });
+
+      function focusNavigation() {
+        const link =
+          navigation.querySelector('[aria-current="page"]') ||
+          navigation.querySelector("a");
+        if (link) link.focus();
+      }
+
+      // Handle browsers that blur the hidden button before the resize event.
+      button.addEventListener("blur", (event) => {
+        if (!mobile.matches && event.relatedTarget === null) {
+          focusNavigation();
+        }
+      });
+
+      function syncWithScreenSize() {
+        const focusedElement = document.activeElement;
+        setOpen(!mobile.matches);
+
+        // Move keyboard focus if resizing hides the focused control.
+        if (mobile.matches && navigation.contains(focusedElement)) {
+          button.focus();
+        } else if (!mobile.matches && focusedElement === button) {
+          focusNavigation();
+        }
+      }
+
+      if (typeof mobile.addEventListener === "function") {
+        mobile.addEventListener("change", syncWithScreenSize);
+      } else {
+        mobile.addListener(syncWithScreenSize);
+      }
+
+      header.classList.add("nav-ready");
+      syncWithScreenSize();
+    })();
+  </script>
 </body>
 
 </html>

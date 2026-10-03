@@ -13,6 +13,75 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
+
+  <style>
+    /* Hide the new button on desktop and when JavaScript is unavailable. */
+    .site-header .nav-toggle {
+      display: none;
+    }
+
+    /* All layout changes are limited to mobile screens. */
+    @media screen and (max-width: 700px) {
+      .site-header.nav-ready .header-inner {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: .65rem 1rem;
+        padding-block: .7rem;
+      }
+
+      .site-header.nav-ready .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        min-width: 72px;
+        min-height: 44px;
+        padding: .45rem .8rem;
+        font: 600 .875rem/1 var(--sans);
+        color: var(--heading);
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        cursor: pointer;
+        appearance: none;
+      }
+
+      .site-header .nav-toggle:focus-visible {
+        outline: 2px solid var(--link);
+        outline-offset: 4px;
+      }
+
+      /* The expanded menu appears below the name and button. */
+      .site-header.nav-ready .site-nav {
+        flex: 0 0 100%;
+        min-width: 0;
+        padding-top: .5rem;
+        border-top: 1px solid var(--line);
+      }
+
+      /* Without JavaScript, the original navigation remains visible. */
+      .site-header.nav-ready .nav-toggle[aria-expanded="false"]+.site-nav {
+        display: none;
+      }
+
+      .site-header.nav-ready .site-nav ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .25rem 1rem;
+      }
+
+      .site-header.nav-ready .site-nav a {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 44px;
+        padding-block: .4rem;
+      }
+    }
+  </style>
+
   <meta property="og:title" content="Gallery · Charlie Wu">
   <meta property="og:description" content="Photographs with friends and collaborators from Charlie Wu’s gallery.">
   <meta property="og:type" content="website">
@@ -21,10 +90,16 @@
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="site-name" href="index.html">Charlie Wu</a>
-      <nav class="site-nav" aria-label="Main navigation">
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">
+        Menu
+      </button>
+
+      <nav id="main-navigation" class="site-nav" aria-label="Main navigation">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="Research.html">Research</a></li>
@@ -37,8 +112,10 @@
       </nav>
     </div>
   </header>
+
   <main id="main" class="container" tabindex="-1">
     <h1>Gallery</h1>
+
     <section class="gallery-section" aria-label="Wuppertal, October 2026">
       <h2 id="wuppertal-2026">
         <a href="https://sites.google.com/view/workshop-ls2026/" target="_blank" rel="noopener">A Sprint on Local
@@ -46,6 +123,7 @@
           Germany</a>.
         <span class="gallery-date">September 2026</span>
       </h2>
+
       <figure class="gallery-photo gallery-feature">
         <img src="images/charlie_julia_orange.jpeg" width="5712" height="4284"
           alt="Charlie Wu and Julia Meng at a workshop dinner" decoding="async">
@@ -55,18 +133,22 @@
         </figcaption>
       </figure>
     </section>
+
     <section class="gallery-section" aria-labelledby="fort-independence">
-      <h2 id="fort-independence">Some pictures at
+      <h2 id="fort-independence">
         <a href="https://www.nps.gov/places/fort-independence-castle-william.htm" target="_blank" rel="noopener">Fort
-          Independence</a>
+          Independence</a> in <a href="https://maps.app.goo.gl/VCYyZVSZzDiN6Txv5" target="_blank" rel="noopener">Boston,
+          Massachusetts</a>.
         <span class="gallery-date">May 2026</span>
       </h2>
+
       <div class="gallery-grid">
         <figure class="gallery-photo">
           <img src="images/clowns.jpeg" width="1536" height="2048"
             alt="A photograph being taken by the water at Fort Independence" loading="lazy" decoding="async">
           <figcaption>Who is he taking a photo of?</figcaption>
         </figure>
+
         <figure class="gallery-photo">
           <img src="images/christian_samuel_swings.jpeg" width="5120" height="3840"
             alt="Christian Kremer and Samuel Muñoz-Echániz with some swings" loading="lazy" decoding="async">
@@ -79,6 +161,64 @@
       </div>
     </section>
   </main>
+
+  <script>
+    (() => {
+      const header = document.querySelector(".site-header");
+      if (!header) return;
+
+      const button = header.querySelector(".nav-toggle");
+      const navigation = header.querySelector("#main-navigation");
+      if (!button || !navigation) return;
+
+      const mobile = window.matchMedia("screen and (max-width: 700px)");
+
+      function setOpen(open) {
+        button.setAttribute("aria-expanded", String(open));
+        button.textContent = open ? "Close" : "Menu";
+      }
+
+      button.addEventListener("click", () => {
+        setOpen(button.getAttribute("aria-expanded") !== "true");
+      });
+
+      header.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          mobile.matches &&
+          button.getAttribute("aria-expanded") === "true"
+        ) {
+          event.preventDefault();
+          setOpen(false);
+          button.focus();
+        }
+      });
+
+      function syncWithScreenSize() {
+        const focusedElement = document.activeElement;
+        setOpen(!mobile.matches);
+
+        // Move keyboard focus if resizing hides the focused control.
+        if (mobile.matches && navigation.contains(focusedElement)) {
+          button.focus();
+        } else if (!mobile.matches && focusedElement === button) {
+          const link =
+            navigation.querySelector('[aria-current="page"]') ||
+            navigation.querySelector("a");
+          if (link) link.focus();
+        }
+      }
+
+      if (typeof mobile.addEventListener === "function") {
+        mobile.addEventListener("change", syncWithScreenSize);
+      } else {
+        mobile.addListener(syncWithScreenSize);
+      }
+
+      header.classList.add("nav-ready");
+      syncWithScreenSize();
+    })();
+  </script>
 </body>
 
 </html>
